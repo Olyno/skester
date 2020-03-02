@@ -26,8 +26,8 @@ public class EffAssertTrueFalse extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssertTrueFalse.class,
-                "assert [is] true [if] <.+> [with [message] %-string%]",
-                "assert [is] false [if] <.+> [with [message] %-string%]"
+                "assert [is] true [if] <.+> [with [[error] message] %-string%]",
+                "assert [is] false [if] <.+> [with [[error] message] %-string%]"
         );
     }
 

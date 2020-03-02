@@ -26,8 +26,8 @@ public class EffFailTest extends AssertEffect {
 
     static {
         Skript.registerEffect(EffFailTest.class,
-                "fail [the] test [with [message] %-string%]",
-                "fail [the] test [if] <.+> [with [message] %-string%]"
+                "fail [the] test [with [[error] message] %-string%]",
+                "fail [the] test [if] <.+> [with [[error] message] %-string%]"
         );
     }
 

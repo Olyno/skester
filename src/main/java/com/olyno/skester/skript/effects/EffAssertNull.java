@@ -25,7 +25,7 @@ public class EffAssertNull extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssertNull.class,
-                "assert [is] null %object% [with [message] %-string%]",
+                "assert [is] null %object% [with [[error] message] %-string%]",
                 "assert [is] not null %object% [with [message] %-string%]"
         );
     }

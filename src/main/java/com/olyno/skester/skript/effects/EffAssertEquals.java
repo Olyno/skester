@@ -25,8 +25,8 @@ public class EffAssertEquals extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssertEquals.class,
-                "assert [is] equal[s] %object% to %object% [with message %-string%]",
-                "assert [is] not equal[s] %object% to %object% [with message %-string%]"
+                "assert [is] equal[s] %object% to %object% [with [[error] message] %-string%]",
+                "assert [is] not equal[s] %object% to %object% [with [[error] message] %-string%]"
         );
     }
 
