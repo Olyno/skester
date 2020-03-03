@@ -54,6 +54,7 @@ public class Skester extends JavaPlugin {
         }));
 
         // Register events
+        /*
         Reflections reflections = new Reflections("com.olyno.skester.skript.events");
         Set<Class<? extends Listener>> events = reflections.getSubTypesOf(Listener.class);
         events.forEach(
@@ -65,6 +66,7 @@ public class Skester extends JavaPlugin {
                     }
                 }
         );
+        */
 
     }
 
