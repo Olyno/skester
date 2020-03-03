@@ -1,5 +1,6 @@
 package com.olyno.skester.testing;
 
+import com.olyno.skester.skript.scopes.ScopeTest;
 import com.vdurmont.emoji.EmojiParser;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -78,7 +79,7 @@ public class Testing {
     public void fail(String message) {
         this.isFailed = true;
         Bukkit.getConsoleSender().sendMessage(
-                EmojiParser.parseToUnicode(ChatColor.RED + ":x: " + this.testName)
+                EmojiParser.parseToUnicode(ChatColor.RED + (ScopeTest.tests.get(0) == this ? "" : "\t|- ") + ":x: " + this.testName)
         );
         Bukkit.getConsoleSender().sendMessage(
                 EmojiParser.parseToUnicode(ChatColor.RED + "\t|- " + message)
@@ -88,7 +89,7 @@ public class Testing {
     public void fail(String excepted, String got) {
         this.isFailed = true;
         Bukkit.getConsoleSender().sendMessage(
-                EmojiParser.parseToUnicode(ChatColor.RED + ":x: " + this.testName)
+                EmojiParser.parseToUnicode(ChatColor.RED + (ScopeTest.tests.get(0) == this ? "" : "\t|- ") + ":x: " + this.testName)
         );
         Bukkit.getConsoleSender().sendMessage(
                 EmojiParser.parseToUnicode(
@@ -100,22 +101,25 @@ public class Testing {
     public void fail(String excepted, String got, String message) {
         this.isFailed = true;
         Bukkit.getConsoleSender().sendMessage(
-                EmojiParser.parseToUnicode(ChatColor.RED + ":x: " + message)
+                EmojiParser.parseToUnicode(ChatColor.RED + (ScopeTest.tests.get(0) == this ? "" : "\t|- ") + ":x: " + this.testName)
         );
         Bukkit.getConsoleSender().sendMessage(
-                EmojiParser.parseToUnicode(ChatColor.RED + "\t|- Excepted \"" + excepted + "\", got \"" + got + "\"")
+                EmojiParser.parseToUnicode(ChatColor.RED + (ScopeTest.tests.get(0) == this ? "" : "\t\t|- ") + ":x: " + message)
+        );
+        Bukkit.getConsoleSender().sendMessage(
+                EmojiParser.parseToUnicode(ChatColor.RED + "\t\t\t|- Excepted \"" + excepted + "\", got \"" + got + "\"")
         );
     }
 
     public void pass() {
         Bukkit.getConsoleSender().sendMessage(
-                EmojiParser.parseToUnicode(ChatColor.GREEN + ":white_check_mark: " + this.testName)
+                EmojiParser.parseToUnicode(ChatColor.GREEN + (ScopeTest.tests.get(0) == this ? "" : "\t|- ") + ":white_check_mark: " + this.testName)
         );
     }
 
     public void pass(String message) {
         Bukkit.getConsoleSender().sendMessage(
-                EmojiParser.parseToUnicode(ChatColor.GREEN + ":white_check_mark: " + message)
+                EmojiParser.parseToUnicode(ChatColor.GREEN + (ScopeTest.tests.get(0) == this ? "" : "\t|- ") + ":white_check_mark: " + message)
         );
     }
 
