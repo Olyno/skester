@@ -8,7 +8,7 @@ Skester is a [Skript](https://github.com/SkriptLang/Skript) addon to create your
 
 ## Usage
 
-**Checks code:**
+**Write tests:**
 
 ```vb
 command test [<text>]:
@@ -22,7 +22,7 @@ command test [<text>]:
             assert equals arg-1 to "this" with message "First argument should be ""this"""
 ```
 
-**And get result:**
+**And get results:**
 
 ![Result of the code below](https://i.imgur.com/B2snAB3.png)
 
