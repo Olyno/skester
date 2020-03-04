@@ -1,7 +1,7 @@
 name: Skester
 description: Create tests for your scripts!
 author: Olyno
-version: "1.0.0"
+version: "1.1.0"
 main: com.olyno.skester.Skester
 depend:
   - Skript
