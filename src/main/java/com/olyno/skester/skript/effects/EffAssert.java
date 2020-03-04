@@ -12,7 +12,7 @@ import ch.njol.util.Kleenean;
 import com.olyno.skester.util.effects.AssertEffect;
 import org.bukkit.event.Event;
 
-@Name("Assert")
+@Name("Assert Condition")
 @Description("Checks if condition is respected. Fails if it is not.")
 @Examples({
         "command check:\n" +
@@ -26,7 +26,7 @@ public class EffAssert extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssert.class,
-                "assert [if] <.+>  [with [[error] message] %-string%]"
+                "assert if <.+> [with [[error] message] %-string%]"
         );
     }
 

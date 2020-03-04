@@ -9,27 +9,25 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import com.olyno.skester.testing.Testing;
+import com.olyno.skester.testing.TestingAssert;
 import com.olyno.skester.util.scope.EffectSection;
+import com.vdurmont.emoji.EmojiParser;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.Event;
 
 import java.util.LinkedList;
 
 @Name("Scope Test")
 @Description("Create a test. The string is the name of the test.")
-@Examples({
-        "command checkNull:\n" +
-                "\ttrigger:\n" +
-                "\t\tit \"should be null\":\n" +
-                "\t\t\tbroadcast \"Awesome!\""
-})
+@Examples({ "command checkNull:\n" + "\ttrigger:\n" + "\t\tit \"should be null\":\n" + "\t\t\tbroadcast \"Awesome!\"" })
 @Since("1.0.0")
 
 public class ScopeTest extends EffectSection {
 
     static {
-        Skript.registerCondition(ScopeTest.class,
-                "it %string%"
-        );
+        Skript.registerCondition(ScopeTest.class, "it %string%");
     }
 
     public static Testing latestTest;
@@ -39,9 +37,12 @@ public class ScopeTest extends EffectSection {
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
-        if (checkIfCondition()) return false;
-        if (!hasSection()) return false;
+    public boolean init(Expression<?>[] expr, int matchedPattern, Kleenean isDelayed,
+            SkriptParser.ParseResult parseResult) {
+        if (checkIfCondition())
+            return false;
+        if (!hasSection())
+            return false;
         testName = (Expression<String>) expr[0];
         loadSection(true);
         return true;
@@ -50,15 +51,40 @@ public class ScopeTest extends EffectSection {
     @Override
     protected void execute(Event e) {
         latestTest = new Testing(testName.getSingle(e));
+        latestTest.setTestId(tests.size());
         tests.add(latestTest);
         runSection(e);
-        if (!latestTest.getFailed()) {
-            latestTest.pass();
-            tests.remove(latestTest);
-            if (tests.size() > 0) {
-                latestTest = tests.get(tests.size() - 1);
+        for (Testing test : tests) {
+            Bukkit.getConsoleSender().sendMessage(
+                EmojiParser.parseToUnicode(
+                    test.isFailed() ?
+                        ChatColor.RED + (test.getTestId() == 0 ? "" : "\t".repeat( test.getTestId() )) + ":x: " + test.getTestName()
+                    :
+                        ChatColor.GREEN + (test.getTestId() == 0 ? "" : "\t".repeat( test.getTestId() )) + ":white_check_mark: " + test.getTestName()
+                )
+            );
+            for (TestingAssert testingAssert : test.getAsserts()) {
+                if (testingAssert.isFailed()) {
+                    Bukkit.getConsoleSender().sendMessage(
+                        EmojiParser.parseToUnicode(
+                            ChatColor.RED + "\t".repeat( test.getTestId() + 1 ) + "|- :x: " + (testingAssert.getMessage() != null ? testingAssert.getMessage() : "<Testing>")
+                        )
+                    );
+                    Bukkit.getConsoleSender().sendMessage(
+                        EmojiParser.parseToUnicode(
+                            ChatColor.RED + "\t".repeat( test.getTestId() + 2 ) + "==> Excepted \"" + testingAssert.getOutput() + "\", got \"" + testingAssert.getInput() + "\""
+                        )
+                    );
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(
+                        EmojiParser.parseToUnicode(
+                            ChatColor.GREEN + "\t".repeat( test.getTestId() + 1 ) + "|- :white_check_mark: " + testingAssert.getMessage()
+                        )
+                    );
+                }
             }
         }
+        tests.clear();
     }
 
     @Override
