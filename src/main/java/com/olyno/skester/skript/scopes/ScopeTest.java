@@ -58,33 +58,37 @@ public class ScopeTest extends EffectSection {
             Bukkit.getConsoleSender().sendMessage(
                 EmojiParser.parseToUnicode(
                     test.isFailed() ?
-                        ChatColor.RED + (test.getTestId() == 0 ? "" : "\t".repeat( test.getTestId() )) + ":x: " + test.getTestName()
+                        ChatColor.RED + (test.getTestId() == 0 ? "" : repeat( "\t", test.getTestId() )) + ":x: " + test.getTestName()
                     :
-                        ChatColor.GREEN + (test.getTestId() == 0 ? "" : "\t".repeat( test.getTestId() )) + ":white_check_mark: " + test.getTestName()
+                        ChatColor.GREEN + (test.getTestId() == 0 ? "" : repeat( "\t", test.getTestId() )) + ":white_check_mark: " + test.getTestName()
                 )
             );
             for (TestingAssert testingAssert : test.getAsserts()) {
                 if (testingAssert.isFailed()) {
                     Bukkit.getConsoleSender().sendMessage(
                         EmojiParser.parseToUnicode(
-                            ChatColor.RED + "\t".repeat( test.getTestId() + 1 ) + "|- :x: " + (testingAssert.getMessage() != null ? testingAssert.getMessage() : "<Testing>")
+                            ChatColor.RED + repeat( "\t", test.getTestId() + 1 ) + "|- :x: " + (testingAssert.getMessage() != null ? testingAssert.getMessage() : "<Testing>")
                         )
                     );
                     Bukkit.getConsoleSender().sendMessage(
                         EmojiParser.parseToUnicode(
-                            ChatColor.RED + "\t".repeat( test.getTestId() + 2 ) + "==> Excepted \"" + testingAssert.getOutput() + "\", got \"" + testingAssert.getInput() + "\""
+                            ChatColor.RED + repeat( "\t", test.getTestId() + 2 ) + "==> Excepted \"" + testingAssert.getOutput() + "\", got \"" + testingAssert.getInput() + "\""
                         )
                     );
                 } else {
                     Bukkit.getConsoleSender().sendMessage(
                         EmojiParser.parseToUnicode(
-                            ChatColor.GREEN + "\t".repeat( test.getTestId() + 1 ) + "|- :white_check_mark: " + testingAssert.getMessage()
+                            ChatColor.GREEN + repeat( "\t", test.getTestId() + 1 ) + "|- :white_check_mark: " + testingAssert.getMessage()
                         )
                     );
                 }
             }
         }
         tests.clear();
+    }
+
+    private String repeat(String value, int amount) {
+        return new String(new char[amount]).replace("\0", value);
     }
 
     @Override
