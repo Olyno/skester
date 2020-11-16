@@ -15,10 +15,10 @@ import org.bukkit.event.Event;
 @Name("Fail Test")
 @Description("Makes the test fail if a condition is respected (or just force to fail the test).")
 @Examples({
-        "command failTest:\n" +
-                "\ttrigger:\n" +
-                "\t\tit \"should be failed\":\n" +
-                "\t\t\tfail test"
+    "command failTest:\n" +
+        "\ttrigger:\n" +
+        "\t\tit \"should be failed\":\n" +
+        "\t\t\tfail test"
 })
 @Since("1.0.0")
 
@@ -26,8 +26,8 @@ public class EffFailTest extends AssertEffect {
 
     static {
         Skript.registerEffect(EffFailTest.class,
-                "fail [the] test [with [[error] message] %-string%]",
-                "fail [the] test [if] <.+> [with [[error] message] %-string%]"
+            "fail [the] test [with [[error] message] %-string%]",
+            "fail [the] test [if] <.+> [with [[error] message] %-string%]"
         );
     }
 

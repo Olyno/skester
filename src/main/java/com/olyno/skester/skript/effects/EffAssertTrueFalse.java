@@ -15,10 +15,10 @@ import org.bukkit.event.Event;
 @Name("Assert True/False")
 @Description("Checks if a value is true/false. Fails if it is not.")
 @Examples({
-        "command checkTrue:\n" +
-                "\ttrigger:\n" +
-                "\t\tit \"should be true\":\n" +
-                "\t\t\tassert true if sender is console with message \"The console is the sender!\""
+    "command checkTrue:\n" +
+        "\ttrigger:\n" +
+        "\t\tit \"should be true\":\n" +
+        "\t\t\tassert true if sender is console with message \"The console is the sender!\""
 })
 @Since("1.0.0")
 
@@ -26,8 +26,8 @@ public class EffAssertTrueFalse extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssertTrueFalse.class,
-                "assert [is] true [if] <.+> [with [[error] message] %-string%]",
-                "assert [is] false [if] <.+> [with [[error] message] %-string%]"
+            "assert [is] true [if] <.+> [with [[error] message] %-string%]",
+            "assert [is] false [if] <.+> [with [[error] message] %-string%]"
         );
     }
 

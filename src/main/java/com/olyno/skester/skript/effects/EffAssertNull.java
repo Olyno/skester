@@ -14,10 +14,10 @@ import org.bukkit.event.Event;
 @Name("Assert Null")
 @Description("Checks if a value is null. Throw an error if it is not.")
 @Examples({
-        "command checkNull:\n" +
-                "\ttrigger:\n" +
-                "\t\tit \"should be null\":\n" +
-                "\t\t\tassert null {_test} with message \"This variable is null!\""
+    "command checkNull:\n" +
+        "\ttrigger:\n" +
+        "\t\tit \"should be null\":\n" +
+        "\t\t\tassert null {_test} with message \"This variable is null!\""
 })
 @Since("1.0.0")
 
@@ -25,8 +25,8 @@ public class EffAssertNull extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssertNull.class,
-                "assert [is] null %object% [with [[error] message] %-string%]",
-                "assert [is] not null %object% [with [message] %-string%]"
+            "assert [is] null %object% [with [[error] message] %-string%]",
+            "assert [is] not null %object% [with [message] %-string%]"
         );
     }
 

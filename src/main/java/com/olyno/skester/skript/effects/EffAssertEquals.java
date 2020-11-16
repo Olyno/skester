@@ -14,10 +14,10 @@ import org.bukkit.event.Event;
 @Name("Assert Equals")
 @Description("Checks if a value is equal to another. Fails if it is not.")
 @Examples({
-        "command checkConsole:\n" +
-                "\ttrigger:\n" +
-                "\t\tit \"should be equal\":\n" +
-                "\t\t\tassert equals sender to console with message \"This sender is not the console!\""
+    "command checkConsole:\n" +
+        "\ttrigger:\n" +
+        "\t\tit \"should be equal\":\n" +
+        "\t\t\tassert equals sender to console with message \"This sender is not the console!\""
 })
 @Since("1.0.0")
 
@@ -25,8 +25,8 @@ public class EffAssertEquals extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssertEquals.class,
-                "assert [is] equal[s] %object% to %object% [with [[error] message] %-string%]",
-                "assert [is] not equal[s] %object% to %object% [with [[error] message] %-string%]"
+            "assert [is] equal[s] %object% to %object% [with [[error] message] %-string%]",
+            "assert [is] not equal[s] %object% to %object% [with [[error] message] %-string%]"
         );
     }
 

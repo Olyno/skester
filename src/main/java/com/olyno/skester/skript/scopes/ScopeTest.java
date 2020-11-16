@@ -17,11 +17,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Event;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 @Name("Scope Test")
 @Description("Create a test. The string is the name of the test.")
-@Examples({ "command checkNull:\n" + "\ttrigger:\n" + "\t\tit \"should be null\":\n" + "\t\t\tbroadcast \"Awesome!\"" })
+@Examples({
+    "command checkNull:\n" +
+    "\ttrigger:\n" +
+    "\t\tit \"should be null\":\n" +
+    "\t\t\tbroadcast \"Awesome!\""
+})
 @Since("1.0.0")
 
 public class ScopeTest extends EffectSection {
@@ -32,6 +38,8 @@ public class ScopeTest extends EffectSection {
 
     public static Testing latestTest;
     public static LinkedList<Testing> tests = new LinkedList<>();
+
+    private HashMap<ChatColor, String> emojis = new HashMap<>();
 
     private Expression<String> testName;
 
@@ -44,6 +52,8 @@ public class ScopeTest extends EffectSection {
         if (!hasSection())
             return false;
         testName = (Expression<String>) expr[0];
+        emojis.put(ChatColor.RED, ":x:");
+        emojis.put(ChatColor.GREEN, ":white_check_mark:");
         loadSection(true);
         return true;
     }
@@ -55,13 +65,9 @@ public class ScopeTest extends EffectSection {
         tests.add(latestTest);
         runSection(e);
         for (Testing test : tests) {
+            ChatColor resultColor = test.isFailed() ? ChatColor.RED : ChatColor.GREEN;
             Bukkit.getConsoleSender().sendMessage(
-                EmojiParser.parseToUnicode(
-                    test.isFailed() ?
-                        ChatColor.RED + (test.getTestId() == 0 ? "" : repeat( "\t", test.getTestId() )) + ":x: " + test.getTestName()
-                    :
-                        ChatColor.GREEN + (test.getTestId() == 0 ? "" : repeat( "\t", test.getTestId() )) + ":white_check_mark: " + test.getTestName()
-                )
+                EmojiParser.parseToUnicode(resultColor + repeat("\t", test.getTestId()) + (test.getTestId() > 0 ? "|- " : "") + emojis.get(resultColor) + " " + test.getTestName())
             );
             for (TestingAssert testingAssert : test.getAsserts()) {
                 if (testingAssert.isFailed()) {

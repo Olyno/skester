@@ -15,10 +15,10 @@ import org.bukkit.event.Event;
 @Name("Assert Condition")
 @Description("Checks if condition is respected. Fails if it is not.")
 @Examples({
-        "command check:\n" +
-                "\ttrigger:\n" +
-                "\t\tit \"should be work\":\n" +
-                "\t\t\tassert if sender is console with message \"This sender is not the console!\""
+    "command check:\n" +
+        "\ttrigger:\n" +
+        "\t\tit \"should be work\":\n" +
+        "\t\t\tassert if sender is console with message \"This sender is not the console!\""
 })
 @Since("1.0.0")
 
@@ -26,7 +26,7 @@ public class EffAssert extends AssertEffect {
 
     static {
         Skript.registerEffect(EffAssert.class,
-                "assert if <.+> [with [[error] message] %-string%]"
+            "assert if <.+> [with [[error] message] %-string%]"
         );
     }
 
