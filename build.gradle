@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT'
+    implementation 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
     implementation 'com.github.SkriptLang:Skript:2.5.3'
     compile 'com.vdurmont:emoji-java:5.1.1'
     compile 'org.reflections:reflections:0.10.1'
